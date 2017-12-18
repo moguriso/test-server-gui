@@ -25,9 +25,9 @@
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="sendButton">
        <property name="text">
-        <string>PushButton</string>
+        <string>Send Monitoring</string>
        </property>
       </widget>
      </item>
@@ -47,6 +47,13 @@
       <widget class="QTextEdit" name="textEdit">
        <property name="readOnly">
         <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="clearButton">
+       <property name="text">
+        <string>Clear Log</string>
        </property>
       </widget>
      </item>

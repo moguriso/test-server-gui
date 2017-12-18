@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "testcommand.h"
+#include <QtCore/QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,9 +16,16 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_clearButton_clicked()
 {
-    QTextDocument *doc = ui->textEdit->document();
-    QString s = doc->toPlainText();
-    ui->textEdit->setPlainText(s + "hoge");
+    ui->textEdit->clear();
+}
+
+void MainWindow::on_sendButton_clicked()
+{
+    TestCommand tst;
+    QString str = tst.getCommand();
+    if (pWsServer->SendText(str) == false) {
+        qDebug() << "send failed";
+    }
 }

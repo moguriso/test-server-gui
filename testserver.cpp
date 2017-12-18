@@ -39,24 +39,20 @@ void TestServer::onNewConnection()
     connect(pSocket, &QWebSocket::disconnected, this, &TestServer::socketDisconnected);
 
     m_clients << pSocket;
-
-    for (QWebSocket *pClient : qAsConst(m_clients)) {
-        pClient->sendTextMessage("abcdefghijkllm");
-    }
 }
 
 void TestServer::processTextMessage(QString message)
 {
     QWebSocket *pClient = qobject_cast<QWebSocket *>(sender());
-    if (pClient)
-    {
-        pClient->sendTextMessage(message);
-    }
+//   if (pClient)
+//   {
+//       pClient->sendTextMessage(message);
+//   }
     if (this->m_pTextEdit)
     {
         QTextDocument *doc = m_pTextEdit->document();
         QString s = doc->toPlainText();
-        m_pTextEdit->setPlainText(s + message);
+        m_pTextEdit->setPlainText(s + message + "\n");
     }
 }
 
@@ -67,6 +63,18 @@ void TestServer::processBinaryMessage(QByteArray message)
     {
         pClient->sendBinaryMessage(message);
     }
+}
+
+bool TestServer::SendText(QString str)
+{
+    bool r_inf = false;
+
+    for (QWebSocket *pClient : qAsConst(m_clients)) {
+        pClient->sendTextMessage(str);
+        r_inf = true;
+    }
+
+    return r_inf;
 }
 
 void TestServer::socketDisconnected()

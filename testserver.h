@@ -16,6 +16,8 @@ public:
     explicit TestServer(quint16 port, QTextEdit *textEdit, QObject *parent = Q_NULLPTR);
     virtual ~TestServer();
 
+    bool SendText(QString str);
+
 private Q_SLOTS:
     void onNewConnection();
     void processTextMessage(QString message);
