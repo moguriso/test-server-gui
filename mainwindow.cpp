@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->pWsServer = new TestServer(1234, this->ui->textEdit);
 }
 
 MainWindow::~MainWindow()
@@ -15,6 +16,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    QString str = this->ui->label->text();
-    this->ui->label->setText(str + " hoge");
+    QTextDocument *doc = ui->textEdit->document();
+    QString s = doc->toPlainText();
+    ui->textEdit->setPlainText(s + "hoge");
 }
